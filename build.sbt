@@ -2,7 +2,7 @@ name         := "cs2inclass"
 organization := "trinity"
 version      := "0.1"
 
-scalaVersion := "2.13.6"
+scalaVersion := "2.13.5"
 
 libraryDependencies ++= Seq(
   "org.scalafx"   %% "scalafx"   % "16.0.0-R24",
