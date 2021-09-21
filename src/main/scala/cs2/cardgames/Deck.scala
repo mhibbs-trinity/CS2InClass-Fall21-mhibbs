@@ -6,12 +6,18 @@ class Deck {
     cards = scala.util.Random.shuffle(cards)
   }
   def deal():Card = {
-    val tmp = cards(0) //cards.head
-    cards = cards.tail
-    tmp
+    if(cards.length == 0) null
+    else {
+      val tmp = cards(0) //cards.head
+      cards = cards.tail
+      tmp
+    }
   }
   def isEmpty():Boolean = { cards.length == 0 }
   def add(c:Card):Unit = { cards = c :: cards }
+  def combine(other:Deck):Unit = { cards = cards ::: other.cards }
+
+  override def toString():String = cards.mkString(", ")
 }
 
 object Deck {

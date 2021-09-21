@@ -22,6 +22,9 @@ class Card(val rank:Int, val suit:Char) {
   def <= (other:Card):Boolean = {
     this.rank <= other.rank
   }
+  def == (other:Card):Boolean = {
+    this.rank == other.rank
+  }
 }
 
 object Card {
