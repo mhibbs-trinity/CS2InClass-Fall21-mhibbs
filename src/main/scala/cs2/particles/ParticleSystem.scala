@@ -7,7 +7,14 @@ class ParticleSystem(private var origin:Vec2) {
   private var parts:List[Particle] = Nil
 
   def addParticle():Unit = {
-    parts ::= new Particle(origin, new Vec2(math.random()*0.1-0.05, math.random()*0.1-0.05))
+    /*
+                           //Vec2(origin)
+    if(math.random() > 0.5)
+      parts ::= new SquareParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
+    else
+      parts ::= new RoundParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
+    */
+    parts ::= new ImageParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
   }
 
   def display(g:GraphicsContext):Unit = {
@@ -15,6 +22,9 @@ class ParticleSystem(private var origin:Vec2) {
   }
   def timeStep():Unit = {
     parts.foreach(x => x.timeStep())
+  }
+  def applyForce(force:Vec2):Unit = {
+    parts.foreach(x => x.applyForce(force))
   }
 
 
