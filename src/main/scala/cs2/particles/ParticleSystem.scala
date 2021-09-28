@@ -3,8 +3,8 @@ package cs2.particles
 import cs2.util.Vec2
 import scalafx.scene.canvas.GraphicsContext
 
-class ParticleSystem(private var origin:Vec2) {
-  private var parts:List[Particle] = Nil
+class ParticleSystem(protected var origin:Vec2) {
+  protected var parts:List[Particle] = Nil
 
   def addParticle():Unit = {
     /*

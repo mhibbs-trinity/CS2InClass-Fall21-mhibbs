@@ -11,6 +11,7 @@ class ImageParticle(p:Vec2,v:Vec2) extends Particle(p,v) {
   override def display(g:GraphicsContext):Unit = {
     g.globalAlpha = (lifetime / 400.0)  
     g.drawImage(ImageParticle.img, pos.x,pos.y)
+    g.globalAlpha = 1.0
   }
 
   override def timeStep():Unit = {
