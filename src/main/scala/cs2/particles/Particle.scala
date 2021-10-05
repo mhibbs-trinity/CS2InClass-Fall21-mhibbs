@@ -19,4 +19,9 @@ abstract class Particle(protected var pos:Vec2, private var vel:Vec2) {
     vel += force
   }
 
+  def isAlive():Boolean = {
+    true
+  }
+
+
 }

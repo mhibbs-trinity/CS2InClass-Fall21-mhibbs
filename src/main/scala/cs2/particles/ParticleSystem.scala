@@ -2,9 +2,10 @@ package cs2.particles
 
 import cs2.util.Vec2
 import scalafx.scene.canvas.GraphicsContext
+import scala.collection.mutable.Buffer
 
 class ParticleSystem(protected var origin:Vec2) {
-  protected var parts:List[Particle] = Nil
+  protected var parts:Buffer[Particle] = Buffer()
 
   def addParticle():Unit = {
     /*
@@ -14,7 +15,7 @@ class ParticleSystem(protected var origin:Vec2) {
     else
       parts ::= new RoundParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
     */
-    parts ::= new ImageParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
+    parts +:= new ImageParticle(origin.clone(), new Vec2(math.random()-0.5, math.random()-0.5))
   }
 
   def display(g:GraphicsContext):Unit = {
@@ -22,6 +23,12 @@ class ParticleSystem(protected var origin:Vec2) {
   }
   def timeStep():Unit = {
     parts.foreach(x => x.timeStep())
+    for(p <- parts) {
+      if(!p.isAlive()) {
+        parts -= p
+      }
+    }
+    println(parts.length)
   }
   def applyForce(force:Vec2):Unit = {
     parts.foreach(x => x.applyForce(force))

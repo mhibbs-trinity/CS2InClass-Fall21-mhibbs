@@ -19,6 +19,10 @@ class ImageParticle(p:Vec2,v:Vec2) extends Particle(p,v) {
     lifetime -= 1.0
   }
 
+  override def isAlive(): Boolean = {
+    lifetime > 0.0
+  }
+
 }
 
 object ImageParticle {
