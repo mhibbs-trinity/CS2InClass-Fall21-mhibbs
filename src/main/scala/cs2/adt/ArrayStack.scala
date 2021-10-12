@@ -5,6 +5,13 @@ class ArrayStack[A : Manifest] extends Stack[A] {
   var len:Int = 0
 
   override def push(elem:A):Unit = {
+    if(len == a.length) {
+      val tmp = Array.ofDim[A](len * 2)
+      for(i <- 0 until a.length) {
+        tmp(i) = a(i)
+      }
+      a = tmp
+    }
     a(len) = elem
     len += 1
     /* Naive approach

@@ -8,9 +8,10 @@ abstract class Stack[A] {
 }
 
 object Stack {
+  def apply[A : Manifest]():Stack[A] = new ArrayStack[A]()
 
   def main(args:Array[String]):Unit = {
-    val s:Stack[Int] = new ArrayStack[Int]()
+    val s:Stack[Int] = Stack[Int]()
     println(s.isEmpty())
     s.push(5)
     s.push(7)
