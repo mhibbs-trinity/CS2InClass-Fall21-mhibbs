@@ -23,7 +23,11 @@ class ArrayStack[A : Manifest] extends Stack[A] {
     a = tmp
     */
   }
+  @throws(classOf[java.util.EmptyStackException])
   def pop():A = {
+    if(isEmpty) {
+      throw new java.util.EmptyStackException()
+    }
     len -= 1
     a(len)
     /* Naive approach
@@ -36,6 +40,11 @@ class ArrayStack[A : Manifest] extends Stack[A] {
     result
     */
   }
-  def peek():A = { a(len-1) }
+  def peek():A = {   
+    if(isEmpty) {
+      throw new java.util.EmptyStackException()
+    }  
+    a(len-1)
+  }
   def isEmpty():Boolean = { len == 0 }
 }

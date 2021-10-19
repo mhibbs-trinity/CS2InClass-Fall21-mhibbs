@@ -18,11 +18,21 @@ class ArrayQueue[A : Manifest] extends Queue[A] {
     len += 1
   }
   def dequeue():A = {
+    if(isEmpty) {
+      throw new EmptyQueueException("Queue is empty")
+    }
     val tmp = a(beg)
     len -= 1
     beg = (beg + 1) % a.length
     tmp
   }
-  def peek():A = a(beg)
+  def peek():A = {
+    if(isEmpty) {
+      throw new EmptyQueueException("Queue is empty")
+    }
+    a(beg)
+  }
   def isEmpty():Boolean = { len == 0 }
 }
+
+class EmptyQueueException(msg:String) extends Exception(msg) { }
