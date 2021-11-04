@@ -31,7 +31,7 @@ class DoublyLinkedSeq[A: Manifest] extends Seq[A] with Iterable[A] {
     def hasPrevious: Boolean = { rover != end }
   }
 
-  def iterator(): BidirectionalIterator = new BidirectionalIterator()
+  def iterator: BidirectionalIterator = new BidirectionalIterator()
 
   private var end: Node = new Node(new Array[A](1)(0), null, null)
   end.prev = end
