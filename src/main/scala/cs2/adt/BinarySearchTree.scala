@@ -23,7 +23,11 @@ class BinarySearchTree[A <% Ordered[A]] {
         else right = new Node(elem, null, null)
       }
     }
-    private def passUpMaxKid():(A,Node) = {
+    def getMax():A = {
+      if(right == null) data
+      else right.getMax()
+    }
+    def passUpMaxKid():(A,Node) = {
       if(right == null) (data, left)
       else {
         val (d,n) = right.passUpMaxKid()
@@ -64,4 +68,83 @@ class BinarySearchTree[A <% Ordered[A]] {
     if(root != null) root = root.remove(elem)
   }
   def isEmpty():Boolean = { root == null }
+
+  def getMax():A = {
+    root.getMax()
+  }
+  def removeMax():A = {
+    val (d,n) = root.passUpMaxKid()
+    root = n
+    d
+  }
+
+  def printPreOrder():Unit = {
+    def processNode(n:Node):Unit = {
+      if(n != null) {
+        print(n.data + ",")
+        processNode(n.left)
+        processNode(n.right)
+      }
+    }
+    processNode(root)
+    println()
+  }
+  def printInOrder():Unit = {
+    def processNode(n:Node):Unit = {
+      if(n != null) {
+        processNode(n.left)
+        print(n.data + ",")
+        processNode(n.right)
+      }
+    }
+    processNode(root)
+    println()
+  }
+  def printPostOrder():Unit = {
+    def processNode(n:Node):Unit = {
+      if(n != null) {
+        processNode(n.left)
+        processNode(n.right)
+        print(n.data + ",")
+      }
+    }
+    processNode(root)
+    println()
+  }
+
+  def printPreOrderStack():Unit = {
+    val stk = Stack[Node]()
+    stk.push(root)
+    while(!stk.isEmpty()) {
+      val n = stk.pop()
+      if(n != null) {
+        print(n.data + ",")
+        stk.push(n.right)
+        stk.push(n.left)
+      }
+    }
+    println
+  }
+
 }
+
+object BSTTester {
+  def main(args:Array[String]):Unit = {
+    val bst = new BinarySearchTree[Int]()
+    bst.insert(40)
+    bst.insert(20)
+    bst.insert(60)
+    bst.insert(10)
+    bst.insert(15)
+    bst.insert(50)
+    bst.insert(45)
+    bst.insert(47)
+    bst.printPreOrder()
+    bst.printInOrder()
+    bst.printPostOrder()
+    bst.printPreOrderStack()
+  }
+}
+
+
+
