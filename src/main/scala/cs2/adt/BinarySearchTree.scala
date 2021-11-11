@@ -1,6 +1,8 @@
 package cs2.adt
 
-class BinarySearchTree[A <% Ordered[A]] {
+import scalafx.scene.input.KeyCode
+
+class BinarySearchTree[A <% Ordered[A]] extends Iterable[A] {
   private class Node(var data:A, var left:Node, var right:Node) {
     def contains(elem:A):Boolean = {
       if(data <= elem && data >= elem) true
@@ -56,6 +58,38 @@ class BinarySearchTree[A <% Ordered[A]] {
   }
 
   private var root:Node = null
+
+  def iterator:Iterator[A] = {
+    new Iterator[A] {
+      val stk = Stack[Node]()
+      var n:Node = root
+      stk.push(root)
+      
+      def next():A = {
+        n = stk.pop()
+        val ret = n.data
+        if(n.right != null) stk.push(n.right)
+        if(n.left != null) stk.push(n.left)
+        ret
+      }
+      def hasNext:Boolean = {
+        !stk.isEmpty
+      }
+    }
+  }
+  /*
+  val stk = Stack[Node]()
+  stk.push(root)
+  while(!stk.isEmpty()) {
+    val n = stk.pop()
+    if(n != null) {
+      print(n.data + ",")
+      stk.push(n.right)
+      stk.push(n.left)
+    }
+  }
+  */
+
   def contains(elem:A):Boolean = {
     if(root == null) false
     else root.contains(elem)
@@ -67,7 +101,7 @@ class BinarySearchTree[A <% Ordered[A]] {
   def remove(elem:A):Unit = {
     if(root != null) root = root.remove(elem)
   }
-  def isEmpty():Boolean = { root == null }
+  override def isEmpty:Boolean = { root == null }
 
   def getMax():A = {
     root.getMax()
@@ -143,6 +177,9 @@ object BSTTester {
     bst.printInOrder()
     bst.printPostOrder()
     bst.printPreOrderStack()
+    val it = bst.iterator
+    while(it.hasNext) { println(it.next) }
+    for(x <- bst) print (x + ",")
   }
 }
 

@@ -6,5 +6,5 @@ class BSTPriorityQueue[A <% Ordered[A]] extends PriorityQueue[A] {
   def add(elem:A):Unit = bst.insert(elem)
   def get():A = bst.removeMax()
   def peek():A = bst.getMax()
-  def isEmpty():Boolean = bst.isEmpty()
+  def isEmpty():Boolean = bst.isEmpty
 }
