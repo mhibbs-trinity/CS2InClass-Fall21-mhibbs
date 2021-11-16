@@ -13,8 +13,19 @@ abstract class Set[A <% Ordered[A]] extends Iterable[A] {
     }
     res
   }
-  def union(other:Set[A]):Set[A]
-  def difference(other:Set[A]):Set[A]
+  def union(other:Set[A]):Set[A] = {
+    val res = Set[A]()
+    for(x <- this) { res.add(x) }
+    for(x <- other) { res.add(x) }
+    res
+  }
+  def difference(other:Set[A]):Set[A] = {
+    val res = Set[A]()
+    for(x <- this) {
+      if(!other.contains(x)) res.add(x)
+    }
+    res
+  }
 }
 
 object Set {
