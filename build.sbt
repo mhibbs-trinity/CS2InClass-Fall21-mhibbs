@@ -32,4 +32,4 @@ connectInput := true
 
 // set the main class for the main 'run' task
 // change Compile to Test to set it for 'test:run'
-//Compile / run / mainClass := Some("cs2.net.ChatProgram")
+Compile / run / mainClass := Some("cs2.io.StreamStuff")
